@@ -1,0 +1,32 @@
+{
+  "name": "application-name",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "3.4.4",
+    "ejs": "*",
+    "bcrypt": "*",
+    "redis": "*"
+  },
+  "description": "### What do we use here: \t1. we use node.js of course. \t2. express as server. \t3. handlebars for template engine. \t4. bcrypt for authentication. \t5. redis for database and redis-0.7.2 for communicate with the db.",
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/doron2402/Exblog.git"
+  },
+  "keywords": [
+    "node.js",
+    "express",
+    "redis",
+    "blog"
+  ],
+  "author": "Doron Segal",
+  "license": "Open Source",
+  "bugs": {
+    "url": "https://github.com/doron2402/Exblog/issues"
+  }
+}
