@@ -1,6 +1,11 @@
 ## Node js application:
 
+
+
 ### What do we use here:
+	* before starting follow this guide to install redis: http://redis.io/topics/quickstart
+	* after installing redis run the redis server by typing "redis-server", you can check if the server is running by opening a new tab and type "redis-cli" and than type "keys *"
+	* running node, just get into Exblog and type: "npm install && node app.js"
 	1. we use node.js of course.
 	2. express as server.
 	3. handlebars for template engine.
@@ -27,7 +32,8 @@
 	- check if user is logged in before posting.
 	- adding message module.
 	- like button.
-	- 
+	- installing Grunt for testing and more automation.
+	- add bower.io to this project
 	
 
 I think its a great project to start and build your thing. 
