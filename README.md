@@ -9,3 +9,25 @@
 
 
 ### Routes and Views
+1. API - Routes
+	GET - /api/user/:id (get user info)
+	POST - /api/entry (add entry)
+	GET - /api/entries/:page? each page return minumum of post you can modify it.
+
+2. Site routes
+	- '/' 		: return all entry (default is 10 post per page)
+	- /post 	: post html form let the user enter a post
+	- /register 	: register user to the site 
+	- /login	: login html form
+	- .logout	: "delete" session user will be logout
+
+
+### Good luck, there are still thing I'm working on such as: 
+	- using different DB by using config file.
+	- check if user is logged in before posting.
+	- adding message module.
+	- like button.
+	- 
+	
+
+I think its a great project to start and build your thing. 
