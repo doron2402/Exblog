@@ -3,17 +3,22 @@
  * Module dependencies.
  */
 
-var express = require('express');
-var routes = require('./routes');
-//var user = require('./routes/user');
-var user = require('./lib/middleware/user');
-var register = require('./routes/register');
-var messages = require('./lib/messages');
-var login = require('./routes/login');
-var http = require('http');
-var path = require('path');
-
-var app = express();
+var express = require('express')
+	,routes = require('./routes')
+	,api = require('./routes/api')
+	//Lib
+	,Entry = require('./lib/entry')
+	,messages = require('./lib/messages')
+	//MiddleWares
+	,user = require('./lib/middleware/user')
+	,validate = require('./lib/middleware/validate')
+	,page = require('./lib/middleware/page')
+	,register = require('./routes/register')
+	,entries = require('./routes/entries')
+	,login = require('./routes/login')
+	,http = require('http')
+	,path = require('path')
+	,app = express();
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -26,17 +31,25 @@ app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.cookieParser('SDFG#$@%TGSa08ujmn5@#$dfsg9b%#!'));
 app.use(express.session());
+app.use('/api', api.auth) //When we use the API we need to Authenticate the user
 app.use(user);
 app.use(messages);
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
+//API - REST
+app.get('/api/user/:id', api.user);
 
-app.get('/', routes.index);
+app.get('/', page(Entry.count, 5), entries.list);
+
+//Entries
+app.get('/post', entries.form);
+app.post('/post', validate.required('entry[title]'), validate.lengthAbove('entry[title]',4), entries.submit);
 
 //Registration
 app.get('/register', register.form);

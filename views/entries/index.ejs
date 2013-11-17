@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+  <% include ../layout/menu %>
+   
+   <% entries.forEach(function(entry) { %>
+   	<div class="entry">
+   		<h3><%= entry.title %></h3>
+   		<p><%= entry.body %></p>
+   		<p class="post-author">Posted by <%= entry.username %></p>
+   	</div>
+   	<hr />
+   <% }) %>
+
+   <% include ../layout/pager %> 
+  </body>
+</html>
