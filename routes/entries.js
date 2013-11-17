@@ -19,6 +19,9 @@ exports.list = function(req, res, next) {
 exports.submit = function (req, res, next) {
 
 	var data = req.body.entry;
+	
+	console.log('data');
+	console.log(req.body);
 
 	if (!data.title || data.title.length < 4){
 		res.error("Title is required! and must be over 4 characters.");
@@ -36,9 +39,13 @@ exports.submit = function (req, res, next) {
 		if (err)
 			return next(err)
 
-		res.redirect('/');
+		if (req.remoteUser) //API Support -> remoteUser mean api call
+			res.json({message: 'Entry added.'})
+		else
+			res.redirect('/');
 	});
 };
+
 exports.form = function (req, res, next) {
 	//Check for Authentication
 	res.render('entries/post', { title: 'Post something' });

@@ -24,6 +24,7 @@ var express = require('express')
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.json());
@@ -35,15 +36,19 @@ app.use('/api', api.auth) //When we use the API we need to Authenticate the user
 app.use(user);
 app.use(messages);
 app.use(app.router);
-app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(routes.notfound);
+app.use(routes.errorPage);
 
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
+
+
 //API - REST
-app.get('/api/user/:id', api.user);
+app.get('/api/user/:id', api.user); //get user data
+app.post('/api/entry', entries.submit); //Add entry
+app.get('/api/entries/:page?', page(Entry.count), api.entries);
 
 app.get('/', page(Entry.count, 5), entries.list);
 
